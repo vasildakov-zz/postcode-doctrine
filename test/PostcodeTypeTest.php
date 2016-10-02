@@ -11,6 +11,7 @@ use VasilDakov\Postcode\Doctrine\PostcodeType;
 class PostcodeTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $platform;
+
     private $type;
 
     public static function setUpBeforeClass()
@@ -33,15 +34,58 @@ class PostcodeTypeTest extends \PHPUnit_Framework_TestCase
         $this->type = Type::getType('postcode');
     }
 
-    /**
-     * @test
-     */
-    public function classHasPostcodeConstant()
-    {
-        $reflection = new \ReflectionClass(PostcodeType::class);
 
-        $this->assertEquals($reflection->getConstant('POSTCODE'), 'postcode');
+    /**
+     * @covers \VasilDakov\Postcode\Doctrine\PostcodeType::convertToDatabaseValue
+     */
+    public function testPostcodeConvertsToDatabaseValue()
+    {
+        $postcode = new Postcode('TW8 8FB');
+        $expected = (string) $postcode;
+        $actual = $this->type->convertToDatabaseValue($postcode, $this->platform);
+        $this->assertEquals($expected, $actual);
     }
+
+
+    /**
+     * @covers \VasilDakov\Postcode\Doctrine\PostcodeType::convertToDatabaseValue
+     */
+    public function testNullConversionForDatabaseValue()
+    {
+        $this->assertNull($this->type->convertToDatabaseValue(null, $this->platform));
+    }
+
+
+    /**
+     * @covers \VasilDakov\Postcode\Doctrine\PostcodeType::convertToPHPValue
+     */
+    public function testPostcodeConvertsToPHPValue()
+    {
+        $postcode = $this->type->convertToPHPValue('TW8 8FB', $this->platform);
+        $this->assertInstanceOf('VasilDakov\Postcode\Postcode', $postcode);
+        $this->assertEquals('TW8 8FB', (string)$postcode);
+    }
+
+
+    /**
+     * @covers \VasilDakov\Postcode\Doctrine\PostcodeType::convertToPHPValue
+     */
+    public function testInvalidPostcodeConversionForPHPValue()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        $this->type->convertToPHPValue('ABC DEF', $this->platform);
+    }
+
+
+
+    /**
+     * @covers \VasilDakov\Postcode\Doctrine\PostcodeType::requiresSQLCommentHint
+     */
+    public function testRequiresSQLCommentHint()
+    {
+        $this->assertTrue($this->type->requiresSQLCommentHint($this->platform));
+    }
+
 
     /**
      * @return \PHPUnit_Framework_MockObject_MockObject
@@ -50,7 +94,8 @@ class PostcodeTypeTest extends \PHPUnit_Framework_TestCase
     {
         return $this->getMockBuilder('Doctrine\DBAL\Platforms\AbstractPlatform')
             ->setMethods(array('getGuidTypeDeclarationSQL'))
-            ->getMockForAbstractClass();
+            ->getMockForAbstractClass()
+        ;
     }
 
 }

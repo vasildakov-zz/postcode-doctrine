@@ -4,6 +4,7 @@ namespace VasilDakov\Postcode\Doctrine;
 
 use Doctrine\DBAL\Types\Type;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAL\Types\ConversionException;
 use VasilDakov\Postcode\Postcode;
 
 /**
@@ -20,21 +21,58 @@ class PostcodeType extends Type
         return 'postcode';
     }
 
-
+    /**
+     * {@inheritdoc}
+     *
+     * @param string|null                               $value
+     * @param \Doctrine\DBAL\Platforms\AbstractPlatform $platform
+     */
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
         return new Postcode($value);
     }
 
 
+    /**
+     * {@inheritdoc}
+     *
+     * @param Postcode|null                             $value
+     * @param \Doctrine\DBAL\Platforms\AbstractPlatform $platform
+     */
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
-        return (string) $value;
+        if (empty($value)) {
+            return null;
+        }
+
+        if ($value instanceof Postcode || Postcode::isValid($value)) {
+            return (string) $value;
+        }
+
+        throw ConversionException::conversionFailed($value, self::NAME);
     }
 
 
+    /**
+     * {@inheritdoc}
+     *
+     * @return string
+     */
     public function getName()
     {
         return self::POSTCODE;
     }
+
+
+    /**
+     * {@inheritdoc}
+     *
+     * @param \Doctrine\DBAL\Platforms\AbstractPlatform $platform
+     * @return boolean
+     */
+    public function requiresSQLCommentHint(AbstractPlatform $platform)
+    {
+        return true;
+    }
+
 }
