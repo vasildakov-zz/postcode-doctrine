@@ -1,0 +1,32 @@
+{
+    "name": "vasil/doctrine-postcode",
+    "description": "Doctrine Postcode Type",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vasil Dakov",
+            "email": "vasildakov@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^5.6 || ^7.0",
+        "vasildakov/postcode": "^1.1",
+        "doctrine/orm": "^2.5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~5.3",
+        "squizlabs/php_codesniffer": "~2.3",
+        "satooshi/php-coveralls": "~1.0",
+        "phpunit/php-code-coverage": "~3"
+    },
+    "autoload": {
+        "psr-4": {
+            "VasilDakov\\Doctrine\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "VasilDakov\\Doctrine\\": "test/"
+        }
+    }
+}

@@ -1,2 +1,2 @@
-# doctrine-postcode
+# Doctrine Postcode Type
 Doctrine Postcode Type
