@@ -21,12 +21,12 @@
     },
     "autoload": {
         "psr-4": {
-            "VasilDakov\\Doctrine\\": "src/"
+            "VasilDakov\\Doctrine\\DBAL\\Types": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VasilDakov\\Doctrine\\": "test/"
+            "VasilDakovTest\\Doctrine\\DBAL\\Types": "test/"
         }
     }
 }
