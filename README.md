@@ -1,5 +1,5 @@
-# Doctrine Postcode Type
-Doctrine Postcode Type
+# Doctrine UK Postcode Type
+Doctrine UK Postcode Type
 
 [![Build Status](https://travis-ci.org/vasildakov/postcode-doctrine.svg?branch=master)](https://travis-ci.org/vasildakov/doctrine-postcode)
 [![Coverage Status](https://coveralls.io/repos/github/vasildakov/postcode-doctrine/badge.svg?branch=master)](https://coveralls.io/github/vasildakov/postcode-doctrine?branch=master)
