@@ -8,11 +8,11 @@
     processIsolation="false"
     stopOnFailure="false"
     syntaxCheck="false"
-    bootstrap="./test/bootstrap.php">
+    bootstrap="./tests/bootstrap.php">
 
     <testsuites>
         <testsuite name="Doctrine Postcode Type Test Suite">
-            <directory>./test/</directory>
+            <directory>./tests/</directory>
         </testsuite>
     </testsuites>
     <filter>

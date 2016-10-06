@@ -1,6 +1,15 @@
 {
     "name": "vasildakov/postcode-doctrine",
-    "description": "Doctrine Postcode Type",
+    "description": "UK Postcode Doctrine Type",
+    "type": "library",
+    "keywords": [
+        "uk",
+        "postcode",
+        "doctrine",
+        "type",
+        "php"
+    ],
+    "homepage": "https://github.com/vasildakov/postcode-doctrine",
     "license": "MIT",
     "authors": [
         {
@@ -26,7 +35,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "VasilDakovTest\\Postcode\\Doctrine\\": "test/"
+            "VasilDakovTest\\Postcode\\Doctrine\\": "tests/"
         }
     }
 }

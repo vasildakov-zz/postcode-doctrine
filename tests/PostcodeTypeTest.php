@@ -97,5 +97,4 @@ class PostcodeTypeTest extends \PHPUnit_Framework_TestCase
             ->getMockForAbstractClass()
         ;
     }
-
 }

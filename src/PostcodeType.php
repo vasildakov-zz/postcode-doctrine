@@ -15,7 +15,6 @@ class PostcodeType extends Type
 {
     const POSTCODE = 'postcode';
 
-
     public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform)
     {
         return 'postcode';
@@ -74,5 +73,4 @@ class PostcodeType extends Type
     {
         return true;
     }
-
 }
