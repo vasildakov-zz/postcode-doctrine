@@ -6,6 +6,7 @@ use Doctrine\DBAL\Types\Type;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\ConversionException;
 use VasilDakov\Postcode\Postcode;
+use VasilDakov\Postcode\Exception;
 
 /**
  * class PostcodeType
@@ -15,6 +16,12 @@ class PostcodeType extends Type
 {
     const POSTCODE = 'postcode';
 
+    /**
+     * {@inheritdoc}
+     *
+     * @param array                                     $fieldDeclaration
+     * @param \Doctrine\DBAL\Platforms\AbstractPlatform $platform
+     */
     public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform)
     {
         return 'postcode';
@@ -28,7 +35,22 @@ class PostcodeType extends Type
      */
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
-        return new Postcode($value);
+        if (empty($value)) {
+            return null;
+        }
+
+        if ($value instanceof Postcode) {
+            return $value;
+        }
+
+        try {
+            $postcode = new Postcode($value);
+
+        } catch (\InvalidArgumentException $e) {
+            throw ConversionException::conversionFailed($value, self::NAME);
+        }
+
+        return $postcode;
     }
 
 
@@ -44,7 +66,7 @@ class PostcodeType extends Type
             return null;
         }
 
-        if ($value instanceof Postcode || Postcode::isValid($value)) {
+        if ($value instanceof Postcode) {
             return (string) $value;
         }
 

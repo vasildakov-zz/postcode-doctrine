@@ -68,15 +68,12 @@ class PostcodeTypeTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @covers \VasilDakov\Postcode\Doctrine\PostcodeType::convertToPHPValue
+     * @covers \VasilDakov\Postcode\Doctrine\PostcodeType::getName
      */
-    public function testInvalidPostcodeConversionForPHPValue()
+    public function testGetNameReturnsExpectedValue()
     {
-        $this->setExpectedException('InvalidArgumentException');
-        $this->type->convertToPHPValue('ABC DEF', $this->platform);
+        $this->assertEquals('postcode', $this->type->getName());
     }
-
-
 
     /**
      * @covers \VasilDakov\Postcode\Doctrine\PostcodeType::requiresSQLCommentHint
