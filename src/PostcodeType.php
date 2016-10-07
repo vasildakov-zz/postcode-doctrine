@@ -45,7 +45,6 @@ class PostcodeType extends Type
 
         try {
             $postcode = new Postcode($value);
-
         } catch (\InvalidArgumentException $e) {
             throw ConversionException::conversionFailed($value, self::NAME);
         }
