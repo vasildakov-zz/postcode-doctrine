@@ -28,6 +28,10 @@
         "satooshi/php-coveralls": "~1.0",
         "phpunit/php-code-coverage": "~3"
     },
+    "suggest": {
+        "vasildakov/postcode-parser": "^1.*",
+        "vasildakov/postcode-validator": "^1.*"
+    },
     "autoload": {
         "psr-4": {
             "VasilDakov\\Postcode\\Doctrine\\": "src/"
